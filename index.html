@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="/css/weather.css">
+  <title>Succinct Weather Info</title>
+</head>
+<body ng-app="weatherApp">
+  <section class="weather thunderstorm" ng-controller="weatherCtrl">  
+    <form name="cityForm" name="city" ng-submit="getWeather($event)">
+      <input type="text" class="form-control" placeholder="Type a location..." required ng-model="city">
+    </form>
+        
+    <header class="now">
+      <h1>{{results.name}}</h1>
+      <h2>{{temperature | number: 1 }}<span ng-bind-html="tempFormat" class="smallTemp"></span></h2>
+      <ul><li>{{humidity}}</li><img ng-src="{{weatherIcon}}"></ul>
+    </header>
+        <table class="table">
+      <tr ng-repeat="day in fiveDay.list">
+        <td><span class="tempInfo">Hi: </span>{{day.temp.max | number: 1}}&nbsp;&#8457;</td>
+        <td><span class="tempInfo">Lo: </span>{{day.temp.min | number: 1}}&nbsp;&#8457;</td>
+        <td>{{day.weather[0].main}}</td>
+      </tr>
+    </table>
+  </section>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+  <script type="text/javascript" src="/js/weather.js"></script>
+</body>
+</html>
